@@ -1,0 +1,16 @@
+<!-- {% if request.user.user_type == 'CANDIDATE' %} -->
+<h1>Applied jobs</h1>
+{{user.user_type}}
+{{job.title}}
+{% for job_app in jobs %}
+<div>
+  <p>
+    {{job_app.job.title}}
+    {{job_app.job.posted_by}}
+    
+  </p>
+</div>
+{% endfor %}
+
+<!-- {% endif %} -->
+<a href="{% url 'dashboard'%}">back to dashboard</a>

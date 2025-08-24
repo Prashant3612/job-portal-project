@@ -1,0 +1,15 @@
+<title>Profile</title>
+<body>
+  <h1>name={{prof.user.first_name}}</h1>
+  <p>{{prof.prof_summary}}</p>
+  <p>resume={{prof.resume}}</p>
+  <p>preferred_roles={{prof.preferred_roles}}</p>
+  <p>preferred_location={{prof.preferred_location}}</p>
+  <p>education={{prof.education}}</p>
+  <p>skills={{prof.skills}}</p>
+  {{request.user.user_type}}
+</body>
+{% if request.user.user_type == 'CANDIDATE' %}
+<a href="{%url 'prof_update' pk=request.user.userprofile.pk%}">Edit profile</a>
+{% endif %}
+<a href="{%url 'dashboard'%}">Back to Home</a>

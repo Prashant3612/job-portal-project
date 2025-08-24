@@ -1,0 +1,23 @@
+<title>Job Portal</title>
+{% if request.user.is_authenticated %}
+{%if request.user.user_type == 'EMPLOYER' %}
+
+  <button type='submit'><a href="{% url 'job_create'%}">Post Job</a></button>
+
+  <h1>jobs Posted by me:</h1>
+  {%for job in jobs%}
+  <div>
+    <h2><a href="{%url "job_details" pk=job.pk%}">{{job.title}}</a></h2>
+    {{job.description|truncatewords:20}}
+    
+  </div>
+  {%endfor%}
+  {% endif %}
+ 
+
+  
+<form method="post" action="{%url 'logout'%}">
+  {%csrf_token%}
+  <button type="submit">logout</button>
+</form>
+ {% endif %}

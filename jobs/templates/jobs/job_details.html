@@ -1,0 +1,28 @@
+{% if request.user.user_type == 'EMPLOYER' %}
+<a href="{% url 'job_create' %}"><button>post job</button></a>
+
+<title>{{job.title}}</title>
+<h3>{{job.description}}</h3>
+<h3>{{job.location}}</h3>
+<h3>{{job.salary}}</h3>
+<h3>{{job.created_at}}</h3>
+<br>
+<h2>Applicants</h2>
+{%for applicants in job_applications%}
+<p>{{applicants.user}}<a href="{% url 'prof_details' applicants.user.userprofile.pk%}"<button>view profile</button></a></p>
+
+<p>{{applicants.applied_at}}</p>
+{%endfor%}
+
+{% else %}
+<title>{{job.title}}</title>
+<h3>{{job.description}}</h3>
+<h3>{{job.location}}</h3>
+<h3>{{job.salary}}</h3>
+<h3>{{job.posted_by}}</h3>
+<h3>{{job.created_at}}</h3>
+<a href="{% url 'apply_job' job.pk %}">
+  <button>Apply</button>
+</a>
+{%endif%}
+<a href="{%url 'dashboard'%}">Back to all post</a>

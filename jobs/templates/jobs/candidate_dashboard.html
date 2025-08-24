@@ -1,0 +1,22 @@
+<title>Job Portal</title>
+{% if request.user.is_authenticated %}
+{%if request.user.user_type == 'CANDIDATE'%}
+<body>
+  <h1>Open Jobs</h1>
+  {%for job in jobs%}
+  <div>
+    <h2><a href="{%url "job_details" pk=job.pk%}">{{job.title}}</a></h2>
+    <p>{{job.description|truncatewords:20}}</p>
+    <button type='submit'>Apply</button>
+  </div>
+  {%endfor%}
+  <a href="{%url 'prof_details' request.user.userprofile.pk%}">Profile</a>
+  </body>
+{%endif%}
+ {% endif %}
+
+<a href="{%url 'applied_jobs' request.user.pk%}">Applied jobs</a>
+ <form method="post" action="{%url 'logout'%}">
+   {%csrf_token%}
+   <button type="submit">logout</button>
+ </form>
